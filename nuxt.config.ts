@@ -13,6 +13,7 @@ export default defineNuxtConfig({
       link: [
         { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
         { rel: 'preconnect', href: 'https://fonts.gstatic.com' },
+        { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Damion&display=swap' }
       ],
       meta: [
         { 'http-equiv': 'Content-Security-Policy', content: 'upgrade-insecure-requests' }
@@ -21,6 +22,9 @@ export default defineNuxtConfig({
   },
   css: [
     "~/assets/css/common.css"
+  ],
+  plugins: [
+    "plugins/firebase.client.ts"
   ],
   modules: [
     (_options, nuxt) => {
@@ -31,8 +35,17 @@ export default defineNuxtConfig({
     },
     'dayjs-nuxt',
   ],
+  components: [
+    { path: '~/components', pathPrefix: false },
+  ],
   runtimeConfig: {
     public: {
+      apiKey: process.env.NUXT_FIREBASE_API_KRY,
+      authDomain: process.env.NUXT_FIREBASE_AUTH_DOMAIN,
+      projectId: process.env.NUXT_FIREBASE_PROJECT_ID,
+      storageBucket: process.env.NUXT_FIREBASE_STORAGE_BUCKET,
+      messagingSenderId: process.env.NUXT_FIREBASE_MESSAGING_SENDER_ID,
+      appId: process.env.NUXT_FIREBASE_APP_ID,
       // API URL
       apiList: "https://api.playneko.com/api/",
     }

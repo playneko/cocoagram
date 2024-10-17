@@ -1,0 +1,31 @@
+.login-logo_position {
+  z-index: 999;
+  width: 100%;
+  position: absolute;
+}
+
+.login-logo_center {
+  top: calc(100vh - 85vh);
+  text-align: center;
+  position: relative;
+}
+
+.login-logo_font {
+  color: #fff;
+  font-size: xxx-large;
+  font-weight: bolder;
+  font-family: "Damion", cursive;
+}
+
+.login-btn_position {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background: #795548;
+}
+
+.login-btn_center {
+  top: calc(100vh - 60vh);
+  text-align: center;
+  position: relative;
+}
