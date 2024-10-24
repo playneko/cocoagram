@@ -6,6 +6,6 @@
 </template>
 
 <script setup lang="ts">
-import { useAccount } from "~/composables/account";
+import { useAccount } from "./composables/account";
 const { account } = useAccount();
 </script>

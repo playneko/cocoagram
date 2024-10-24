@@ -19,10 +19,14 @@
 </template>
 
 <script setup lang="ts">
-  const signInGoogle = async () => {
-    await useAuth().signInWithGoogle();
-    if (useAuth().token.value) {
-      navigateTo('/');
-    }
+import { navigateTo } from "nuxt/app";
+import { useAuth } from "../../composables/auth";
+
+const signInGoogle = async () => {
+  await useAuth().signInWithGoogle();
+  console.log(useAuth().token.value);
+  if (useAuth().token.value) {
+    navigateTo('/');
   }
+}
 </script>

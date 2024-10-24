@@ -1,5 +1,7 @@
-import { RouteLocationNormalized } from "vue-router";
+import { defineNuxtRouteMiddleware, navigateTo } from "nuxt/app";
+import type { RouteLocationNormalized } from "vue-router";
 import { useAccount } from '~/composables/account';
+import { useAuth } from "~/composables/auth";
 
 export default defineNuxtRouteMiddleware(async (to: RouteLocationNormalized) => {
   // loginページの場合なにもしません
@@ -14,6 +16,5 @@ export default defineNuxtRouteMiddleware(async (to: RouteLocationNormalized) => 
     return await navigateTo('/member/login', { replace: true });
   } else {
     setAccount(token.value);
-    return await navigateTo('/', { replace: true });
   }
 });
