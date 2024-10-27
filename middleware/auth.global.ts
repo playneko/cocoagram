@@ -12,11 +12,12 @@ export default defineNuxtRouteMiddleware(async (to: RouteLocationNormalized) => 
 
   // ログイン情報チェックと取得
   const { checkAuthState } = useAuth();
-  const { account } = useAccount();
+  const { setAccount, account } = useAccount();
   await checkAuthState();
 
   // tokenがなければログインページにリダイレクト
   if (!authUserInfo.value || !account.value) {
+    setAccount(null);
     return await navigateTo('/member/login', { replace: true });
   } else {
     if (to.path == '/member/login') {

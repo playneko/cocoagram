@@ -1,3 +1,14 @@
+.login-alert_position {
+  z-index: 999;
+  width: 100%;
+  position: absolute;
+}
+
+.login-alert_message {
+  margin-top: 15px;
+  justify-self: center;
+}
+
 .login-logo_position {
   z-index: 999;
   width: 100%;
@@ -31,7 +42,53 @@
 }
 
 .header-logo_font {
-  font-size: 1.75rem !important;
+  font-size: 1.6rem !important;
+}
+
+.header-title_font {
+  font-size: 1.6rem !important;
   font-weight: bolder;
   font-family: "Damion", cursive;
+  margin-inline-start: 0px !important;
+}
+
+.header-icon_font {
+  font-size: 1.3rem !important;
+}
+
+.header-margin-bottom_15 {
+  margin-bottom: 15px;
+}
+
+.home-div-flex {
+  display: flex;
+}
+
+.home-global-color {
+  color: #9E9E9E;
+  font-weight: 700;
+}
+
+.home-avatar-right {
+  margin-right: 10px;
+}
+
+.home-like-font_bold {
+  font-weight: bold;
+}
+
+.home-like-font_color {
+  color: #ff0000 !important;
+}
+
+.compass-radius {
+  border-radius: 5px !important;
+}
+
+.compass-container_npd {
+  padding: 0px !important;
+}
+
+.compass-col_npd {
+  padding: 1px !important;
 }

@@ -1,11 +1,11 @@
 <template>
-  <v-card class="mx-auto" width="100%">
+  <div class="mx-auto header-margin-bottom_15" width="100%">
     <v-toolbar color="surface">
-      <!-- <v-app-bar-nav-icon></v-app-bar-nav-icon> -->
-      <v-toolbar-title class="header-logo_font">CocoaGram</v-toolbar-title>
+      <v-btn icon="mdi-instagram" class="header-logo_font"></v-btn>
+      <v-toolbar-title class="header-title_font">CocoaGram</v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn icon="mdi-magnify"></v-btn>
-      <v-btn icon="mdi-dots-vertical"></v-btn>
+      <v-btn icon="mdi-magnify" class="header-icon_font"></v-btn>
+      <!-- <v-btn icon="mdi-dots-vertical"></v-btn> -->
       <template v-slot:extension>
         <v-tabs color="primary" grow v-model="tabs">
           <v-tab :value="1">
@@ -25,7 +25,7 @@
         </v-tabs>
       </template>
     </v-toolbar>
-  </v-card>
+  </div>
 </template>
 
 <script setup lang="ts">

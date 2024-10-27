@@ -49,6 +49,7 @@ export default defineNuxtConfig({
       appId: process.env.NUXT_FIREBASE_APP_ID,
       // API URL
       apiCocoaSignInAuth: "http://localhost:3100/api/cocoa/sign/auth",
+      apiCocoaStoryList: "http://localhost:3100/api/cocoa/story/list",
     }
   }
 })
