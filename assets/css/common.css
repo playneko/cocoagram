@@ -29,3 +29,9 @@
   text-align: center;
   position: relative;
 }
+
+.header-logo_font {
+  font-size: 1.75rem !important;
+  font-weight: bolder;
+  font-family: "Damion", cursive;
+}

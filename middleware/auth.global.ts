@@ -4,17 +4,24 @@ import { useAccount } from '~/composables/account';
 import { useAuth } from "~/composables/auth";
 
 export default defineNuxtRouteMiddleware(async (to: RouteLocationNormalized) => {
-  // loginページの場合なにもしません
-  if(to.path == '/member/login') return;
+  // ユーザ情報クッキーから取得
+  const authUserInfo:any = useCookie<object | null>('authUserInfo');
 
-  const { checkAuthState, token } = useAuth();
-  const { setAccount } = useAccount();
+  // loginページの場合なにもしません
+  if (to.path == '/member/login') return;
+
+  // ログイン情報チェックと取得
+  const { checkAuthState } = useAuth();
+  const { account } = useAccount();
   await checkAuthState();
 
   // tokenがなければログインページにリダイレクト
-  if (!token.value) {
+  if (!authUserInfo.value || !account.value) {
     return await navigateTo('/member/login', { replace: true });
   } else {
-    setAccount(token.value);
+    if (to.path == '/member/login') {
+      await navigateTo('/');
+    }
+    // console.log(account.value);
   }
 });

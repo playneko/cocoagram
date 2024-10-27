@@ -48,7 +48,7 @@ export default defineNuxtConfig({
       messagingSenderId: process.env.NUXT_FIREBASE_MESSAGING_SENDER_ID,
       appId: process.env.NUXT_FIREBASE_APP_ID,
       // API URL
-      apiList: "https://api.playneko.com/api/",
+      apiCocoaSignInAuth: "http://localhost:3100/api/cocoa/sign/auth",
     }
   }
 })

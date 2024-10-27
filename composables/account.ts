@@ -1,6 +1,6 @@
 type Account = {
   account: Ref<any | object>;
-  setAccount: (newVerify: any | object) => void;
+  setAccount: (newAccount: any | object) => void;
 };
 
 export const useAccount = (): Account => {

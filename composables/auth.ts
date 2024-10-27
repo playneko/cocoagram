@@ -6,9 +6,11 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
 } from 'firebase/auth'
+import { useAccount } from '~/composables/account';
 
 type Auth = {
   token: globalThis.Ref<string | null>;
+  userInfo: globalThis.Ref<object | null>;
   signIn: (email: string, password: string) => Promise<void>;
   signOut: () => Promise<void>;
   checkAuthState: () => void;
@@ -16,6 +18,8 @@ type Auth = {
 };
 
 export const useAuth = (): Auth => {
+  const { setAccount } = useAccount();
+  const userInfo = useUserInfo();
   const token = useToken();
 
   const signIn = async (email: string, password: string): Promise<void> => {
@@ -36,12 +40,7 @@ export const useAuth = (): Auth => {
     if (process.server) return;
     const auth = getAuth();
     onAuthStateChanged(auth, async (user) => {
-      if(user) {
-        const idToken = await user.getIdToken();
-        token.value = idToken;
-      } else {
-        token.value = null;
-      }
+      setAccount(user);
     });
   };
 
@@ -51,16 +50,28 @@ export const useAuth = (): Auth => {
     const auth = getAuth();
     const userCredential = await signInWithPopup(auth, provider);
     const idToken = await userCredential.user.getIdToken();
+    const userInfoData = {
+      token: await userCredential.user.getIdToken(),
+      uid: await userCredential.user.uid,
+      email: await userCredential.user.email,
+      photoURL: await userCredential.user.photoURL,
+      phoneNumber: await userCredential.user.phoneNumber,
+      displayName: await userCredential.user.displayName,
+      emailVerified: await userCredential.user.emailVerified
+    }
     token.value = idToken;
+    userInfo.value = userInfoData;
   }
 
   return {
     signIn,
     signOut,
     token,
+    userInfo,
     checkAuthState,
     signInWithGoogle,
   }
 };
 
 export const useToken = (): globalThis.Ref<string | null> => useState<string | null>('token', () => null);
+export const useUserInfo = (): globalThis.Ref<object | null> => useState<object | null>('userInfo', () => null);
