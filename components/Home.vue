@@ -16,7 +16,7 @@
             variant="text"
           ></v-btn>
           <div>
-            <v-btn icon="mdi-message-outline" variant="text"></v-btn>
+            <v-btn icon="mdi-message-outline" variant="text" @click="commentToggle(true, item.no)"></v-btn>
             <span v-if="item.comment_cnt > 0">+{{item.comment_cnt}}</span>
           </div>
           <v-btn icon="mdi-link-variant" variant="text"></v-btn>
@@ -42,14 +42,19 @@
             <span v-if="item.like_cnt > 1">他が </span>
             「いいね！」 しました
           </div>
-          <div>
-            {{item.content}}
-            <span class="home-global-color">続きを読む</span>
+          <div v-show="isRead !== itemIndex">
+            {{stringCut(item.content)}}
+            <span class="home-global-color" @click="readToggle(itemIndex)">続きを読む</span>
           </div>
-          <div class="home-global-color">
+          <div v-show="isRead === itemIndex">
+            {{item.content}}
+            <span class="home-global-color" @click="readToggle(-1)">読み返す</span>
+          </div>
+          <div class="home-global-color" @click="commentToggle(true, item.no)">
             コメントをすべて見る
           </div>
           <div class="home-global-color">
+            <v-icon icon="mdi-clock" start></v-icon>
             {{dayjs(item.createdAt).format('YYYY年MM月DD日')}}
           </div>
         </v-card-text>
@@ -60,16 +65,30 @@
 
 <script setup lang="ts">
 import { useAsyncData, useRuntimeConfig } from "nuxt/app";
+import { isEmpty, stringCut } from "~/composables/common";
+import { useComment } from '~/composables/comment';
 import { useAccount } from '~/composables/account';
-import { isEmpty } from "~/composables/common";
 import dayjs from 'dayjs'
 
+const { setIsComment, setCommentIdx } = useComment();
 const { account } = useAccount();
 const config = useRuntimeConfig();
 const isLoading = ref(false);
 const isError = ref(false);
 const message = ref(null);
 const storyList = ref([]);
+const isRead = ref(-1);
+
+// 続きを読む
+const readToggle = (index: number) => {
+  isRead.value = index;
+}
+
+// コメント開く
+const commentToggle = (invaild: boolean, index: number) => {
+  setIsComment(invaild);
+  setCommentIdx(index);
+}
 
 // ストーリィリスト取得
 const getStoryList = async () => {

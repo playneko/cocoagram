@@ -4,6 +4,15 @@ const isEmpty = (value: string | any[] | null | undefined) => {
   }
   return false
 }
+
+const stringCut = (value: string) => {
+  if (!isEmpty(value) && value.length > 45) {
+    return value.substring(0, 45) + "...";
+  }
+  return value;
+}
+
 export {
-  isEmpty
+  isEmpty,
+  stringCut
 };

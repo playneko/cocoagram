@@ -70,7 +70,10 @@ const sendSignInAuth = async (userInfo) => {
       message.value = "システムエラーが発生しました。";
       isError.value = true;
     } else {
-      authUserInfo.value = userInfo.value.token;
+      authUserInfo.value = {
+        token: userInfo.value.token,
+        permission: data.value.permission
+      };
       await navigateTo('/');
     }
   } else {
