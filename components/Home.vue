@@ -55,7 +55,7 @@
           </div>
           <div class="home-global-color">
             <v-icon icon="mdi-clock" start></v-icon>
-            {{dayjs(item.createdAt).format('YYYY年MM月DD日')}}
+            {{datetimeDiff(item.createdAt)}}
           </div>
         </v-card-text>
       </v-card>
@@ -65,12 +65,12 @@
 
 <script setup lang="ts">
 import { useAsyncData, useRuntimeConfig } from "nuxt/app";
-import { isEmpty, stringCut } from "~/composables/common";
+import { isEmpty, stringCut, datetimeDiff } from "~/composables/common";
 import { useComment } from '~/composables/comment';
 import { useAccount } from '~/composables/account';
 import dayjs from 'dayjs'
 
-const { setIsComment, setCommentIdx } = useComment();
+const { setIsComment, setCommentNo, setCommentCount } = useComment();
 const { account } = useAccount();
 const config = useRuntimeConfig();
 const isLoading = ref(false);
@@ -87,31 +87,20 @@ const readToggle = (index: number) => {
 // コメント開く
 const commentToggle = (invaild: boolean, index: number) => {
   setIsComment(invaild);
-  setCommentIdx(index);
+  setCommentNo(index);
+  setCommentCount();
 }
 
 // ストーリィリスト取得
-const getStoryList = async () => {
-  const { data, pending } = await useAsyncData('item', () => $fetch(`${config.public.apiCocoaStoryList}`, {
-    method: "POST",
-    body: {
-      uid: account.value.uid
-    }
-  }));
-
-  if (!isEmpty(data.value)) {
-    isLoading.value = false;
-    if (!data.value.success) {
-      message.value = "システムエラーが発生しました。";
-      isError.value = true;
-    } else {
-      storyList.value = data.value.rows;
-    }
-  } else {
-    message.value = "システムエラーが発生しました。";
-    isError.value = true;
-    isLoading.value = false;
+const { data, pending } = await useAsyncData('item', () => $fetch(`${config.public.apiCocoaStoryList}`, {
+  method: "POST",
+  body: {
+    uid: account.value.uid
+  }
+}));
+if (!isEmpty(data.value)) {
+  if (data.value.success) {
+    storyList.value = data.value.rows;
   }
 }
-getStoryList();
 </script>

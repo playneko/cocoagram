@@ -50,6 +50,7 @@ export default defineNuxtConfig({
       // API URL
       apiCocoaSignInAuth: "http://localhost:3100/api/cocoa/sign/auth",
       apiCocoaStoryList: "http://localhost:3100/api/cocoa/story/list",
+      apiCocoaCommentList: "http://localhost:3100/api/cocoa/comment/list",
     }
   }
 })

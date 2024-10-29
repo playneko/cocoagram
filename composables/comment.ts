@@ -1,25 +1,33 @@
 type Comment = {
   isComment: Ref<boolean | false>;
-  commentIdx: Ref<number | 0>;
+  commentNo: Ref<number | 0>;
+  commentCount: Ref<number | 0>;
   setIsComment: (newIsComment: boolean | false) => void;
-  setCommentIdx: (newCommentIdx: number | 0) => void;
+  setCommentNo: (newCommentNo: number | 0) => void;
+  setCommentCount: () => void;
 };
 
 export const useComment = (): Comment => {
   const isComment = useState<boolean | false>("isComment", () => false);
-  const commentIdx = useState<number | 0>("commentIdx", () => 0);
+  const commentNo = useState<number | 0>("commentNo", () => 0);
+  const commentCount = useState<number | 0>("commentCount", () => 0);
 
   const setIsComment = (newIsComment: boolean | false) => {
     isComment.value = newIsComment;
   };
-  const setCommentIdx = (newCommentIdx: number | 0) => {
-    commentIdx.value = newCommentIdx;
+  const setCommentNo = (newCommentNo: number | 0) => {
+    commentNo.value = newCommentNo;
+  };
+  const setCommentCount = () => {
+    commentCount.value++;
   };
 
   return {
     isComment,
-    commentIdx,
+    commentNo,
+    commentCount,
     setIsComment,
-    setCommentIdx
+    setCommentNo,
+    setCommentCount
   };
 };

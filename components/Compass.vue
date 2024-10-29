@@ -10,7 +10,6 @@
             class="compass-col_npd"
           >
             <v-sheet
-              height="100"
               color="grey-lighten-2"
               class="compass-radius"
             >
