@@ -23,12 +23,21 @@
               <template v-slot:subtitle>
                 {{item.content}}
               </template>
+              <template v-slot:append v-if="item.uid === userId">
+                <v-btn
+                  icon="mdi-close"
+                  size="x-small"
+                  @click="commentDelete(item.no)"
+                ></v-btn>
+              </template>
             </v-list-item>
           </v-list>
         </div>
       </div>
       <div class="comment-write">
-        <v-text-field class="comment-wirte_margin">
+        <v-text-field
+          class="comment-wirte_margin"
+          v-model="commentContent">
           <template v-slot:prepend>
             <v-avatar
               size="40"
@@ -39,7 +48,13 @@
             </v-avatar>
           </template>
           <template v-slot:append>
-            <v-btn icon="mdi-rocket" size="40" color="brown-lighten-1"></v-btn>
+            <v-btn
+              size="40"
+              icon="mdi-rocket"
+              color="brown-lighten-1"
+              @click="commentWrite"
+              :loading="isLoading"
+            ></v-btn>
           </template>
         </v-text-field>
       </div>
@@ -56,7 +71,11 @@ const { commentNo, commentCount, isComment, setIsComment } = useComment();
 const { account } = useAccount();
 const config = useRuntimeConfig();
 const avatarMe = ref(account.value.photoURL);
+const userId = ref(account.value.uid);
 const commentList = ref([]);
+const commentWriteFlg = ref(0);
+const commentContent = ref("");
+const isLoading = ref(false);
 
 // モーダルクローズ
 const closeModal = () => {
@@ -65,17 +84,17 @@ const closeModal = () => {
 }
 
 // コメント取得
-const { data, refresh } = await useAsyncData('item', () => $fetch(`${config.public.apiCocoaCommentList}`, {
+const { data } = await useAsyncData('item', () => $fetch(`${config.public.apiCocoaCommentList}`, {
   method: "POST",
   body: {
     sid: commentNo.value
   }
 }),{
-  watch: [commentNo, commentCount]
+  watch: [commentNo, commentCount, commentWriteFlg]
 });
 
 // リストを再取得した場合、データを再設定
-watch(data, (commentNo: any, commentCount: any) => {
+watch(data, (commentNo: any, commentCount: any, commentWriteFlg: number) => {
   commentList.value = [];
   if (!isEmpty(data.value)) {
     if (data.value.success) {
@@ -83,4 +102,36 @@ watch(data, (commentNo: any, commentCount: any) => {
     }
   }
 });
+
+// コメント処理
+const sendFetch = async (url: any, content: string, cid: number) => {
+  const { data } = await useAsyncData('item', () => $fetch(`${url}`, {
+    method: "POST",
+    body: {
+      cid: cid,
+      sid: commentNo.value,
+      uid: account.value.uid,
+      content: content
+    }
+  }));
+  if (!isEmpty(data.value)) {
+    if (data.value.success) {
+      commentWriteFlg.value++;
+    }
+  }
+  commentContent.value = "";
+  isLoading.value = false;
+}
+
+// コメント作成
+const commentWrite = async () => {
+  isLoading.value = true;
+  await sendFetch(config.public.apiCocoaCommentWrite, commentContent.value, 0);
+}
+
+// コメント削除
+const commentDelete = async (cid: number) => {
+  isLoading.value = true;
+  await sendFetch(config.public.apiCocoaCommentDelete, "", cid);
+}
 </script>

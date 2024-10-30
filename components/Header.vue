@@ -1,5 +1,5 @@
 <template>
-  <div class="mx-auto header-margin-bottom_15" width="100%">
+  <div class="mx-auto" width="100%">
     <v-toolbar color="surface">
       <v-btn icon="mdi-instagram" class="header-logo_font"></v-btn>
       <v-toolbar-title class="header-title_font">CocoaGram</v-toolbar-title>
@@ -29,7 +29,6 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
 import { useAccount } from '~/composables/account';
 import { useTabs } from '~/composables/tabs';
 const { account } = useAccount();

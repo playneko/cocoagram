@@ -1,5 +1,6 @@
 import dayjs from 'dayjs'
 
+// NULLまたは、空白チェック
 const isEmpty = (value: string | any[] | null | undefined) => {
   if (value === null || value === undefined || value.length === 0 || value === '' || value === 'NULL' || value === 'undefined') {
     return true
@@ -7,6 +8,7 @@ const isEmpty = (value: string | any[] | null | undefined) => {
   return false
 }
 
+// 長い文字を...にする
 const stringCut = (value: string) => {
   if (!isEmpty(value) && value.length > 45) {
     return value.substring(0, 45) + "...";
@@ -14,6 +16,7 @@ const stringCut = (value: string) => {
   return value;
 }
 
+// 日時をxx前に変換
 const datetimeDiff = (value: string) => {
   const dateDiffSecond = dayjs(new Date()).diff(value, 'second');
   if (dateDiffSecond > 60) {
@@ -44,8 +47,15 @@ const datetimeDiff = (value: string) => {
   }
 }
 
+// いいね重複チェック
+const distinctLike = (array: any[], value: number) => {
+  const result = array.find(({ no, isLike }) => no == value && isLike == 0);
+  return isEmpty(result) ? 0 : 1;
+}
+
 export {
   isEmpty,
   stringCut,
-  datetimeDiff
+  datetimeDiff,
+  distinctLike
 };

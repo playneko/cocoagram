@@ -62,10 +62,6 @@
   font-size: 1.3rem !important;
 }
 
-.header-margin-bottom_15 {
-  margin-bottom: 15px;
-}
-
 /* home */
 /* ------------------------------------------------------------ */
 
@@ -90,6 +86,12 @@
   color: #ff0000 !important;
 }
 
+.home-loading-center {
+  margin: 0 auto;
+}
+
+/* compass */
+/* ------------------------------------------------------------ */
 .compass-radius {
   border-radius: 5px !important;
 }
@@ -100,6 +102,10 @@
 
 .compass-col_npd {
   padding: 1px !important;
+}
+
+.compass-margin-top_15 {
+  margin-top: 15px;
 }
 
 /* permission */

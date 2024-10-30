@@ -29,7 +29,6 @@
 </template>
 
 <script setup lang="ts">
-import { navigateTo, useAsyncData, useCookie, useRuntimeConfig } from "nuxt/app";
 import { useAuth } from "~/composables/auth";
 
 const config = useRuntimeConfig();
@@ -50,7 +49,7 @@ const signInGoogle = async () => {
 }
 
 // 認証番号サーバに転送
-const sendSignInAuth = async (userInfo) => {
+const sendSignInAuth = async (userInfo: { value: { token: any; uid: any; email: any; photoURL: any; phoneNumber: any; displayName: any; emailVerified: any; }; }) => {
   const { data, pending } = await useAsyncData('item', () => $fetch(`${config.public.apiCocoaSignInAuth}`, {
     method: "POST",
     body: {
