@@ -8,6 +8,11 @@ const isEmpty = (value: string | any[] | null | undefined) => {
   return false
 }
 
+// ログインチェック
+const isAuthCheck = (account: any, authUserInfo: any) => {
+  return !isEmpty(account.value) && !isEmpty(authUserInfo) && !isEmpty(authUserInfo.value.token) && authUserInfo.value.permission > 0 ? true : false;
+}
+
 // 長い文字を...にする
 const stringCut = (value: string) => {
   if (!isEmpty(value) && value.length > 45) {
@@ -53,9 +58,20 @@ const distinctLike = (array: any[], value: number) => {
   return isEmpty(result) ? 0 : 1;
 }
 
+// バックヘッダページチェック
+const headerFilter = (value: string) => {
+  const array = [
+    '/detail'
+  ];
+  const str = value.split('-');
+  return array.indexOf(`/${!isEmpty(str) ? str[0] : 'unknow'}`);
+}
+
 export {
   isEmpty,
+  isAuthCheck,
   stringCut,
   datetimeDiff,
-  distinctLike
+  distinctLike,
+  headerFilter
 };

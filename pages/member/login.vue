@@ -31,8 +31,8 @@
 <script setup lang="ts">
 import { useAuth } from "~/composables/auth";
 
+let authUserInfo: any = useCookie<object | null>('authUserInfo');
 const config = useRuntimeConfig();
-const authUserInfo = useCookie<object | null>('authUserInfo');
 const isLoading = ref(false);
 const isError = ref(false);
 const message = ref(null);

@@ -62,6 +62,11 @@
   font-size: 1.3rem !important;
 }
 
+.header-blank {
+  width: 48px;
+  margin-inline-end: 4px;
+}
+
 /* home */
 /* ------------------------------------------------------------ */
 
@@ -186,4 +191,11 @@
 .comment-list-subtitle, .v-list-item-subtitle {
   font-size: 0.9rem !important;
   font-weight: 800 !important;
+}
+
+/* detail */
+/* ------------------------------------------------------------ */
+
+.detail-bottom_10 {
+  margin-bottom: 10px;
 }

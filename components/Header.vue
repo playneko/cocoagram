@@ -4,7 +4,7 @@
       <v-btn icon="mdi-instagram" class="header-logo_font"></v-btn>
       <v-toolbar-title class="header-title_font">CocoaGram</v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn icon="mdi-magnify" class="header-icon_font"></v-btn>
+      <!-- <v-btn icon="mdi-magnify" class="header-icon_font"></v-btn> -->
       <!-- <v-btn icon="mdi-dots-vertical"></v-btn> -->
       <template v-slot:extension>
         <v-tabs color="primary" grow v-model="tabs">

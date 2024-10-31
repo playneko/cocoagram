@@ -13,7 +13,7 @@
               color="grey-lighten-2"
               class="compass-radius"
             >
-              <v-img src="https://api.playneko.com/devneko/image/get/2024/10/27/000/001.jpg" cover></v-img>
+              <v-img src="https://api.playneko.com/devneko/image/get/2024/10/27/000/001.jpg" cover @click="pageMove(2)"></v-img>
             </v-sheet>
           </v-col>
         </v-row>
@@ -23,4 +23,7 @@
 </template>
 
 <script setup lang="ts">
+const pageMove = async (did: number) => {
+  await navigateTo(`/detail/image/${did}`);
+}
 </script>

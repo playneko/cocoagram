@@ -54,6 +54,8 @@ export default defineNuxtConfig({
       apiCocoaCommentWrite: "http://localhost:3100/api/cocoa/comment/write",
       apiCocoaCommentDelete: "http://localhost:3100/api/cocoa/comment/delete",
       apiCocoaLikeUp: "http://localhost:3100/api/cocoa/like/up",
+      apiCocoaDetailInfo: "http://localhost:3100/api/cocoa/detail/info",
+      apiCocoaDetailImage: "http://localhost:3100/api/cocoa/detail/image",
     }
   }
 })

@@ -8,7 +8,7 @@
           variant="text"
           :prepend-avatar="item.s_photo"
         >
-          <v-img :src="item.filepath + item.filename" cover></v-img>
+          <v-img :src="item.filepath + item.filename" cover @click="pageMove(item.no)"></v-img>
 
           <div class="home-div-flex">
             <v-btn
@@ -110,6 +110,10 @@ const onClickLike = async (idx: number, sid: number) => {
       }
     }
   }
+}
+
+const pageMove = async (sid: number) => {
+  await navigateTo(`/detail/${sid}`);
 }
 
 // ストーリィリスト取得
