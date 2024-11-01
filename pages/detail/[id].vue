@@ -16,18 +16,15 @@ const route = useRoute();
 const config = useRuntimeConfig();
 const detailList = ref([]);
 
-const load = async () => {
-  const { data } = await useAsyncData('item', () => $fetch(`${config.public.apiCocoaDetailInfo}`, {
-    method: "POST",
-    body: {
-      sid: route.params.id
-    }
-  }));
-  if (!isEmpty(data.value)) {
-    if (data.value.success && !isEmpty(data.value.rows)) {
-      detailList.value = data.value.rows;
-    }
+const { data } = await useAsyncData('item', () => $fetch(`${config.public.apiCocoaDetailInfo}`, {
+  method: "POST",
+  body: {
+    sid: route.params.id
+  }
+}));
+if (!isEmpty(data.value)) {
+  if (data.value.success && !isEmpty(data.value.rows)) {
+    detailList.value = data.value.rows;
   }
 }
-load();
 </script>

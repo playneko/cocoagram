@@ -56,6 +56,7 @@ export default defineNuxtConfig({
       apiCocoaLikeUp: "http://localhost:3100/api/cocoa/like/up",
       apiCocoaDetailInfo: "http://localhost:3100/api/cocoa/detail/info",
       apiCocoaDetailImage: "http://localhost:3100/api/cocoa/detail/image",
+      apiCocoaCompassList: "http://localhost:3100/api/cocoa/compass/list",
     }
   }
 })
