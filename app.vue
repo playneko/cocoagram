@@ -3,7 +3,7 @@
       <HeaderBack v-if="isLogin && routeIndex > -1" />
       <Header v-else-if="isLogin" />
       <NuxtPage />
-      <Comments />
+      <Comments v-if="isLogin" />
   </div>
 </template>
 

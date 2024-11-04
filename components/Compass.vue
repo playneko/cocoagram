@@ -30,8 +30,8 @@ const imageList = ref([]);
 const pagenum = ref(0);
 const listTotal = ref(0);
 
-const pageMove = async (did: number) => {
-  await navigateTo(`/detail/image/${did}`);
+const pageMove = async (sid: number) => {
+  await navigateTo(`/detail/${sid}`);
 }
 
 // イメージリスト取得
