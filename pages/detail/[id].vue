@@ -1,13 +1,26 @@
 <template>
   <div>
-    <div v-for="(item, itemIndex) in detailList" :key="itemIndex">
-      <v-img
-        :aspect-ratio="1"
-        class="bg-white detail-bottom_10"
-        :src="item.filepath + item.filename"
-        width="100%"
-      ></v-img>
-    </div>
+    <v-carousel
+      height="400"
+      show-arrows="hover"
+      hide-delimiter-background
+    >
+      <v-carousel-item
+        cover
+        v-for="(item, itemIndex) in detailList" :key="itemIndex"
+      >
+        <v-sheet height="100%">
+          <div class="d-flex fill-height justify-center align-center">
+            <v-img
+              :aspect-ratio="1"
+              :src="item.filepath + item.filename"
+              width="100%"
+            ></v-img>
+          </div>
+        </v-sheet>
+      </v-carousel-item>
+    </v-carousel>
+
     <div
       class="mx-auto"
       color="#fff"

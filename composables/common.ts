@@ -67,11 +67,18 @@ const headerFilter = (value: string) => {
   return array.indexOf(`/${!isEmpty(str) ? str[0] : 'unknow'}`);
 }
 
+// ファイル存在チェック
+const fileFilter = (array: any[], value: any) => {
+  const filterData = array.find(itme => itme.name === value.name);
+  return isEmpty(filterData) ? true : false;
+}
+
 export {
   isEmpty,
   isAuthCheck,
   stringCut,
   datetimeDiff,
   distinctLike,
-  headerFilter
+  headerFilter,
+  fileFilter
 };
