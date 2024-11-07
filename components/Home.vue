@@ -1,5 +1,5 @@
 <template>
-  <v-layout class="mx-auto" max-width="100%">
+  <v-layout class="mx-auto home-non-display" max-width="100%">
     <v-infinite-scroll :items="storyList" :onLoad="load" class="home-loading-center">
       <v-main v-for="(item, itemIndex) in storyList" :key="itemIndex">
         <v-card
@@ -8,7 +8,7 @@
           variant="text"
           :prepend-avatar="item.s_photo"
         >
-          <v-img :src="item.filepath + item.filename" cover @click="pageMove(item.no)"></v-img>
+          <v-img :src="item.filename" cover @click="pageMove(item.no)"></v-img>
 
           <div class="home-div-flex">
             <v-btn
@@ -75,8 +75,8 @@ const { account } = useAccount();
 const config = useRuntimeConfig();
 const storyList = ref([]);
 const isRead = ref(-1);
-const pagenum = ref(0);
-const listTotal = ref(0);
+const pagenum = ref(1);
+const scrollFlg = ref(true);
 
 // 続きを読む
 const readToggle = (index: number) => {
@@ -114,9 +114,8 @@ const pageMove = async (sid: number) => {
 
 // ストーリィリスト取得
 const load = async ({ done }: any) => {
-  if (listTotal.value >= pagenum.value) {
+  if (scrollFlg.value) {
     // ページは５件ずつ増やす
-    pagenum.value = pagenum.value + 5;
     const { data } = await useAsyncData('item', () => $fetch(`${config.public.apiCocoaStoryList}`, {
       method: "POST",
       body: {
@@ -125,8 +124,9 @@ const load = async ({ done }: any) => {
       }
     }));
     if (!isEmpty(data.value)) {
+      pagenum.value = pagenum.value + 1;
+      scrollFlg.value = data.value.scroll > 0 ? true : false;
       if (data.value.success && !isEmpty(data.value.rows)) {
-        listTotal.value = data.value.total;
         storyList.value.push(...data.value.rows);
       }
     }

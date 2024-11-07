@@ -14,7 +14,7 @@
                 color="grey-lighten-2"
                 class="compass-radius"
               >
-                <v-img :src="item.filepath + item.filename" cover @click="pageMove(item.no)"></v-img>
+                <v-img :src="item.filename" cover @click="pageMove(item.no)" class="compass-img-height"></v-img>
               </v-sheet>
             </v-col>
           </v-row>
@@ -27,8 +27,8 @@
 <script setup lang="ts">
 const config = useRuntimeConfig();
 const imageList = ref([]);
-const pagenum = ref(0);
-const listTotal = ref(0);
+const pagenum = ref(1);
+const scrollFlg = ref(true);
 
 const pageMove = async (sid: number) => {
   await navigateTo(`/detail/${sid}`);
@@ -36,9 +36,8 @@ const pageMove = async (sid: number) => {
 
 // イメージリスト取得
 const load = async ({ done }: any) => {
-  if (listTotal.value >= pagenum.value) {
+  if (scrollFlg.value) {
     // ページは５件ずつ増やす
-    pagenum.value = pagenum.value + 5;
     const { data } = await useAsyncData('item', () => $fetch(`${config.public.apiCocoaCompassList}`, {
       method: "POST",
       body: {
@@ -46,8 +45,9 @@ const load = async ({ done }: any) => {
       }
     }));
     if (!isEmpty(data.value)) {
+      pagenum.value = pagenum.value + 1;
+      scrollFlg.value = data.value.scroll > 0 ? true : false;
       if (data.value.success && !isEmpty(data.value.rows)) {
-        listTotal.value = data.value.total;
         imageList.value.push(...data.value.rows);
       }
     }

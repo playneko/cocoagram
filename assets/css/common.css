@@ -74,6 +74,10 @@
   display: flex;
 }
 
+.home-non-display {
+  display: unset !important;
+}
+
 .home-global-color {
   color: #9E9E9E;
   font-weight: 700;
@@ -115,6 +119,10 @@
 
 .compass-loading-center {
   margin: 0 auto;
+}
+
+.compass-img-height {
+  height: 180px !important;
 }
 
 /* permission */
@@ -210,9 +218,19 @@
   margin-right: 30px;
 }
 
-/* detail */
+/* upload */
 /* ------------------------------------------------------------ */
 
 .upload-margin {
   margin: 15px
+}
+
+.upload-alert_position {
+  width: 100%;
+}
+
+.upload-alert_message {
+  width: 100%;
+  margin-top: 15px;
+  justify-self: center;
 }

@@ -13,7 +13,7 @@
           <div class="d-flex fill-height justify-center align-center">
             <v-img
               :aspect-ratio="1"
-              :src="item.filepath + item.filename"
+              :src="item.filename"
               width="100%"
             ></v-img>
           </div>
