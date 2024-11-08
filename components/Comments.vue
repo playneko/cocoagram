@@ -16,12 +16,21 @@
         <div v-for="(item, itemIndex) in commentList" :key="itemIndex">
           <v-list lines="two">
             <v-list-item
-              class="comment-list-title"
+              class="comment-list-title comment-subtitle-opacity"
               :prepend-avatar="item.s_photo"
               :title="item.s_name + ' ' + datetimeDiff(item.createdAt)"
             >
               <template v-slot:subtitle>
-                {{item.content}}
+                <div v-if="!isEmpty(item.content)">
+                  {{item.content}}
+                </div>
+                <div v-else-if="!isEmpty(item.emoji)">
+                  <v-avatar size="80">
+                    <v-img
+                      :src="getImage(item.emoji)"
+                    ></v-img>
+                  </v-avatar>
+                </div>
               </template>
               <template v-slot:append v-if="item.uid === userId">
                 <v-btn
@@ -34,10 +43,30 @@
           </v-list>
         </div>
       </div>
+      <div v-if="isEmoji" class="comment-emoji">
+        <v-row dense class="comment-stamp text-center">
+          <v-col
+            v-for="item in imageList"
+            :key="item.key"
+            no-gutters
+            :class="item.key === selectImage ? 'comment-emoji-select' : ''"
+            @click="selectImage = item.key"
+          >
+            <v-sheet class="pa-1 ma-1">
+              <v-avatar size="x-large">
+                <v-img
+                  :src="item.value"
+                ></v-img>
+              </v-avatar>
+            </v-sheet>
+          </v-col>
+        </v-row>
+      </div>
       <div class="comment-write">
         <v-text-field
           class="comment-wirte_margin"
-          v-model="commentContent">
+          v-model="commentContent"
+        >
           <template v-slot:prepend>
             <v-avatar
               size="40"
@@ -50,7 +79,15 @@
           <template v-slot:append>
             <v-btn
               size="40"
+              icon="mdi-panda"
+              color="brown-lighten-1"
+              @click="isEmoji = !isEmoji"
+              :loading="isLoading"
+            ></v-btn>
+            <v-btn
+              size="40"
               icon="mdi-rocket"
+              class="comment-margin-left"
               color="brown-lighten-1"
               @click="commentWrite"
               :loading="isLoading"
@@ -64,6 +101,7 @@
 
 <script setup lang="ts">
 import { isEmpty, datetimeDiff } from "~/composables/common";
+import { imageList, getImage } from "~/composables/emoji";
 import { useComment } from '~/composables/comment';
 import { useAccount } from '~/composables/account';
 
@@ -76,6 +114,8 @@ const commentList = ref([]);
 const commentWriteFlg = ref(0);
 const commentContent = ref("");
 const isLoading = ref(false);
+const isEmoji = ref(false);
+const selectImage = ref();
 
 // モーダルクローズ
 const closeModal = () => {
@@ -104,14 +144,15 @@ watch(data, (commentNo: any, commentCount: any, commentWriteFlg: number) => {
 });
 
 // コメント処理
-const sendFetch = async (url: any, content: string, cid: number) => {
+const sendFetch = async (url: any, content: string, emoji: string, cid: number) => {
   const { data } = await useAsyncData('item', () => $fetch(`${url}`, {
     method: "POST",
     body: {
       cid: cid,
       sid: commentNo.value,
       uid: account.value.uid,
-      content: content
+      content: !isEmpty(content) ? content : null,
+      emoji: !isEmpty(emoji) ? emoji : null
     }
   }));
   if (!isEmpty(data.value)) {
@@ -120,18 +161,30 @@ const sendFetch = async (url: any, content: string, cid: number) => {
     }
   }
   commentContent.value = "";
+  selectImage.value = null;
   isLoading.value = false;
+  isEmoji.value = false;
 }
 
 // コメント作成
 const commentWrite = async () => {
-  isLoading.value = true;
-  await sendFetch(config.public.apiCocoaCommentWrite, commentContent.value, 0);
+  if (!isEmpty(commentContent.value) || !isEmpty(selectImage.value)) {
+    isLoading.value = true;
+    await sendFetch(config.public.apiCocoaCommentWrite, commentContent.value, selectImage.value, 0);
+  }
 }
 
 // コメント削除
 const commentDelete = async (cid: number) => {
   isLoading.value = true;
-  await sendFetch(config.public.apiCocoaCommentDelete, "", cid);
+  await sendFetch(config.public.apiCocoaCommentDelete, "", "", cid);
+}
+
+const emojiToggle = () => {
+  if (isEmoji.value) {
+    isEmoji.value = false;
+  } else {
+
+  }
 }
 </script>

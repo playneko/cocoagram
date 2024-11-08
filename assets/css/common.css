@@ -205,6 +205,31 @@
   font-weight: 800 !important;
 }
 
+.comment-margin-left {
+  margin-left: 5px;
+}
+
+.comment-emoji {
+  width: 100%;
+  height: 150px;
+  overflow: auto;
+  background: #fff;
+}
+
+.comment-stamp {
+  margin: 0px !important;
+}
+
+.comment-emoji-select {
+  border-radius: 15px;
+  border: 3px solid rgb(255, 99, 99);
+}
+
+.comment-subtitle-opacity > div > .v-list-item-subtitle {
+  opacity: unset !important;
+  font-weight: unset !important;
+}
+
 /* detail */
 /* ------------------------------------------------------------ */
 
