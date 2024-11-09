@@ -1,6 +1,6 @@
 <template>
-  <v-layout class="mx-auto compass-margin-top_15" max-width="100%">
-    <v-infinite-scroll :items="imageList" :onLoad="load" class="compass-loading-center" width="100%">
+  <v-layout class="mx-auto" max-width="100%">
+    <v-infinite-scroll :items="imageList" :onLoad="load" class="compass-loading-center compass-margin-top" width="100%">
       <v-main>
         <v-container fluid class="compass-container_npd">
           <v-row dense>

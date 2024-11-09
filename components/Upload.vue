@@ -1,5 +1,5 @@
 <template>
-  <div class="upload-margin">
+  <div class="upload-overflow">
     <div class="upload-alert_position" v-if="isError">
       <v-alert
         density="compact"
@@ -12,13 +12,15 @@
     <v-file-input
       v-model="files"
       label="ファイル添付"
+      class="upload-input"
       prepend-icon="mdi-camera"
       accept="image/png, image/jpeg, image/bmp, image/gif, image/webp, image/avif, image/heic, image/*"
     ></v-file-input>
-    <div v-if="!isEmpty(filesList)">
+    <div v-if="!isEmpty(filesList)" class="upload-content">
       <v-textarea
         v-model="content"
         label="内容"
+        class="upload-input"
         color="brown-darken-1"
         bg-color="grey-lighten-2"
       ></v-textarea>
@@ -46,7 +48,7 @@
         </v-list-item>
       </v-list>
     </div>
-    <div class="text-center" v-if="!isEmpty(filesList)">
+    <div class="text-center upload-btn" v-if="!isEmpty(filesList)">
       <v-btn
         size="x-large"
         variant="flat"

@@ -67,6 +67,12 @@
   margin-inline-end: 4px;
 }
 
+.header-fixed {
+  width: 100%;
+  z-index: 999;
+  position: fixed;
+}
+
 /* home */
 /* ------------------------------------------------------------ */
 
@@ -87,16 +93,20 @@
   margin-right: 10px;
 }
 
-.home-like-font_bold {
+.home-like-font-bold {
   font-weight: bold;
 }
 
-.home-like-font_color {
+.home-like-font-color {
   color: #ff0000 !important;
 }
 
 .home-loading-center {
   margin: 0 auto;
+}
+
+.home-margin-top > .v-infinite-scroll__side:first-child {
+  margin-top: 112px;
 }
 
 /* compass */
@@ -113,16 +123,16 @@
   padding: 1px !important;
 }
 
-.compass-margin-top_15 {
-  margin-top: 15px;
-}
-
 .compass-loading-center {
   margin: 0 auto;
 }
 
 .compass-img-height {
   height: 180px !important;
+}
+
+.compass-margin-top > .v-infinite-scroll__side:first-child {
+  margin-top: 112px;
 }
 
 /* permission */
@@ -243,12 +253,16 @@
   margin-right: 30px;
 }
 
+.detail-overflow {
+  overflow: auto;
+}
+
+.detail-overflow > .v-window {
+  margin-top: 64px;
+}
+
 /* upload */
 /* ------------------------------------------------------------ */
-
-.upload-margin {
-  margin: 15px
-}
 
 .upload-alert_position {
   width: 100%;
@@ -258,4 +272,44 @@
   width: 100%;
   margin-top: 15px;
   justify-self: center;
+}
+
+.upload-overflow {
+  overflow: auto;
+}
+
+.upload-overflow > .v-input {
+  margin-top: 130px;
+}
+
+.upload-content {
+  margin-bottom: 70px;
+}
+
+.upload-input {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.upload-btn {
+  z-index: 999;
+  bottom: 10px;
+  position: fixed;
+  position-area: bottom;
+}
+
+/* profile */
+/* ------------------------------------------------------------ */
+
+.profile-overflow {
+  overflow: auto;
+}
+
+.profile-overflow > div {
+  margin-top: 130px;
+}
+
+.profile-margin {
+  margin-left: 20px;
+  margin-right: 20px;
 }

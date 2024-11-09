@@ -1,6 +1,6 @@
 <template>
   <v-layout class="mx-auto home-non-display" max-width="100%">
-    <v-infinite-scroll :items="storyList" :onLoad="load" class="home-loading-center">
+    <v-infinite-scroll :items="storyList" :onLoad="load" class="home-loading-center home-margin-top">
       <v-main v-for="(item, itemIndex) in storyList" :key="itemIndex">
         <v-card
           density="compact"
@@ -13,7 +13,7 @@
           <div class="home-div-flex">
             <v-btn
               :icon="item.isLike > 0 ? 'mdi-heart' : 'mdi-heart-outline'"
-              :class="item.isLike > 0 ? 'home-like-font_color' : ''"
+              :class="item.isLike > 0 ? 'home-like-font-color' : ''"
               variant="text"
               @click="onClickLike(itemIndex, item.no)"
             ></v-btn>
@@ -35,7 +35,7 @@
                 <v-img :src="item.l_photo"></v-img>
               </v-avatar>
               <span
-                class="home-like-font_bold"
+                class="home-like-font-bold"
                 v-if="item.like_cnt > 1"
               >
                 {{item.l_name}}

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="detail-overflow">
     <v-carousel
       height="400"
       show-arrows="hover"
