@@ -305,11 +305,30 @@
   overflow: auto;
 }
 
-.profile-overflow > div {
+.profile-overflow > div:first-child {
   margin-top: 130px;
+}
+
+.profile-top {
+  margin-top: 15px;
 }
 
 .profile-margin {
   margin-left: 20px;
   margin-right: 20px;
+}
+
+.profile-name {
+  margin-top: 15px;
+  margin-left: 25px;
+  color: #373737;
+  font-size: small;
+  font-weight: 700;
+}
+
+.profile-content {
+  margin-top: 5px;
+  margin-left: 25px;
+  color: #373737;
+  font-size: 9pt;
 }

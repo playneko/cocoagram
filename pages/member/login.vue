@@ -19,7 +19,7 @@
       <div class="login-btn_center">
         <v-btn @click="signInGoogle" size="x-large" :loading="isLoading">
           <template v-slot:prepend>
-            <v-avatar image="https://api.playneko.com/devneko/image/assets/image/google_g_icon.png"></v-avatar>
+            <v-avatar image="https://api.playneko.com/devneko/cocoa/image/assets/image/google_g_icon.png"></v-avatar>
           </template>
           Google ログイン
         </v-btn>

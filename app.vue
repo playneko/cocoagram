@@ -12,11 +12,13 @@ import { isAuthCheck, headerFilter } from "~/composables/common";
 import { useAccount } from "./composables/account";
 const { account } = useAccount();
 const authUserInfo = useCookie<object | null>('authUserInfo');
-const route = useRoute();
-const routeIndex = ref(headerFilter(route.name));
+const route: any = useRoute();
+const routeIndex = ref(route.name ? headerFilter(route.name) : -1);
 const isLogin = ref(isAuthCheck(account, authUserInfo));
 
 watch(route, () => {
-  routeIndex.value = headerFilter(route.name);
+  if (route.name) {
+    routeIndex.value = headerFilter(route.name);
+  }
 });
 </script>

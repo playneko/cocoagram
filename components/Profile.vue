@@ -7,6 +7,15 @@
         ></v-img>
       </v-avatar>
     </div>
+    <div class="profile-top profile-name">
+      playneko
+    </div>
+    <div class="profile-content">
+      テストテスト❤️<br>
+      テスト😃<br>
+      テスト🚗<br>
+      テスト🍞<br>
+    </div>
   </div>
 </template>
 
