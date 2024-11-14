@@ -110,7 +110,7 @@ const { account } = useAccount();
 const config = useRuntimeConfig();
 const avatarMe = ref(account.value ? account.value.photoURL : null);
 const userId = ref(account.value ? account.value.uid : null);
-const commentList = ref([]);
+const commentList: any = ref([]);
 const commentWriteFlg = ref(0);
 const commentContent = ref("");
 const isLoading = ref(false);
@@ -134,7 +134,7 @@ const { data } = await useAsyncData('item', () => $fetch(`${config.public.apiCoc
 });
 
 // リストを再取得した場合、データを再設定
-watch(data, (commentNo: any, commentCount: any, commentWriteFlg: number) => {
+watch(data, () => {
   commentList.value = [];
   if (!isEmpty(data.value)) {
     if (data.value.success) {

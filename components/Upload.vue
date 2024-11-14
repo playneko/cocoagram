@@ -74,9 +74,9 @@ const { account } = useAccount();
 const config = useRuntimeConfig();
 const isLoading = ref(false);
 const isError = ref(false);
-const message = ref(null);
-const files = ref([]);
-const filesList = ref([]);
+const message: any = ref(null);
+const files: any = ref([]);
+const filesList: any = ref([]);
 const content = ref();
 const counter = ref(0);
 

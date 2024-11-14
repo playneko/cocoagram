@@ -26,7 +26,7 @@
 
 <script setup lang="ts">
 const config = useRuntimeConfig();
-const imageList = ref([]);
+const imageList: any = ref([]);
 const pagenum = ref(1);
 const scrollFlg = ref(true);
 

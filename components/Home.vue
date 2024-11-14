@@ -74,7 +74,7 @@ import { useAccount } from '~/composables/account';
 const { setIsComment, setCommentNo, setCommentCount } = useComment();
 const { account } = useAccount();
 const config = useRuntimeConfig();
-const storyList = ref([]);
+const storyList: any = ref([]);
 const isRead = ref(-1);
 const pagenum = ref(1);
 const scrollFlg = ref(true);

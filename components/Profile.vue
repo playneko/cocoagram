@@ -60,8 +60,8 @@ import { useAccount } from '~/composables/account';
 
 const { account } = useAccount();
 const config = useRuntimeConfig();
-const profileInfo = ref({});
-const imageList = ref([]);
+const profileInfo: any = ref({});
+const imageList: any = ref([]);
 const pagenum = ref(1);
 const isRead = ref(-1);
 const scrollFlg = ref(true);
