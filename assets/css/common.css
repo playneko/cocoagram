@@ -109,6 +109,11 @@
   margin-top: 112px;
 }
 
+.home-title-name .v-card-title {
+  font-size: 0.9rem !important;
+  font-weight: 700 !important;
+}
+
 /* compass */
 /* ------------------------------------------------------------ */
 .compass-radius {
@@ -329,6 +334,39 @@
 .profile-content {
   margin-top: 5px;
   margin-left: 25px;
+  margin-right: 25px;
   color: #373737;
   font-size: 9pt;
+}
+
+.profile-loading-center {
+  margin: 0 auto;
+}
+
+.profile-container_npd {
+  padding: 0px !important;
+}
+
+.profile-col_npd {
+  padding: 1px !important;
+}
+
+.profile-radius {
+  border-radius: 5px !important;
+}
+
+.profile-img-height {
+  height: 180px !important;
+}
+
+.profile-text {
+  font-size: small;
+  margin-left: 25px;
+  align-content: center;
+}
+
+.profile-text-style {
+  font-weight: bold;
+  font-size: xx-large;
+  text-align: center;
 }

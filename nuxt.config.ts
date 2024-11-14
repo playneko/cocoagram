@@ -58,6 +58,8 @@ export default defineNuxtConfig({
       apiCocoaDetailImage: "http://localhost:3100/api/cocoa/detail/image",
       apiCocoaCompassList: "http://localhost:3100/api/cocoa/compass/list",
       apiCocoaUploadImage: "https://api.playneko.com/devneko/cocoa/upload/image",
+      apiCocoaProfileInfo: "http://localhost:3100/api/cocoa/profile/info",
+      apiCocoaProfileList: "http://localhost:3100/api/cocoa/profile/list",
     }
   }
 })

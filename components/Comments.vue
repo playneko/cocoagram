@@ -179,12 +179,4 @@ const commentDelete = async (cid: number) => {
   isLoading.value = true;
   await sendFetch(config.public.apiCocoaCommentDelete, "", "", cid);
 }
-
-const emojiToggle = () => {
-  if (isEmoji.value) {
-    isEmoji.value = false;
-  } else {
-
-  }
-}
 </script>

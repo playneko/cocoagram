@@ -73,6 +73,13 @@ const fileFilter = (array: any[], value: any) => {
   return isEmpty(filterData) ? true : false;
 }
 
+// 開業処理
+const replaceNl2blank = (value: any) => {
+  return !isEmpty(value) ? value.replace(/\r\n/g, '<br>')
+                            .replace(/\n/g, '<br>')
+                            .trim() : value;
+}
+
 export {
   isEmpty,
   isAuthCheck,
@@ -80,5 +87,6 @@ export {
   datetimeDiff,
   distinctLike,
   headerFilter,
-  fileFilter
+  fileFilter,
+  replaceNl2blank
 };

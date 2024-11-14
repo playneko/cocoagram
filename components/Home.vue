@@ -3,6 +3,7 @@
     <v-infinite-scroll :items="storyList" :onLoad="load" class="home-loading-center home-margin-top">
       <v-main v-for="(item, itemIndex) in storyList" :key="itemIndex">
         <v-card
+          class="home-title-name"
           density="compact"
           :title="item.s_name"
           variant="text"
