@@ -49,8 +49,10 @@ const load = async ({ done }: any) => {
       scrollFlg.value = data.value.scroll > 0 ? true : false;
       if (data.value.success && !isEmpty(data.value.rows)) {
         imageList.value.push(...data.value.rows);
-      } else {
+      } else if (!data.value.success) {
         errorCheck();
+      } else {
+        scrollFlg.value = false;
       }
     } else {
       errorCheck();
