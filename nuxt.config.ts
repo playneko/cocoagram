@@ -8,6 +8,15 @@ export default defineNuxtConfig({
   build: {
     transpile: ['vuetify'],
   },
+  nitro : {
+    preset : 'github-pages',
+    routeRules: {
+      '/api/**': {
+        cors: true,
+        proxy: 'https://api.playneko.com/**'
+      }
+    }
+  },
   app : {
     baseURL : '/',
     head: {
