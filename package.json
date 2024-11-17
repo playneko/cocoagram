@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@mdi/font": "^7.4.47",
+    "@nuxtjs/device": "^3.2.4",
     "dayjs-nuxt": "^2.1.11",
     "firebase": "^10.14.1",
     "nuxt": "^3.13.2",

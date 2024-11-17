@@ -10,6 +10,7 @@ export default defineNuxtRouteMiddleware(async (to: RouteLocationNormalized) => 
   // loginページの場合なにもしません
   if (to.path == '/member/login') return;
   if (to.path == '/permission') return;
+  if (to.path == '/notMobile') return;
   if (to.path == '/error') return;
 
   // ログイン情報チェックと取得

@@ -44,6 +44,7 @@ export default defineNuxtConfig({
       })
     },
     'dayjs-nuxt',
+    '@nuxtjs/device'
   ],
   components: [
     { path: '~/components', pathPrefix: false },
