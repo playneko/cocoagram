@@ -61,7 +61,8 @@ const distinctLike = (array: any[], value: number) => {
 // バックヘッダページチェック
 const headerFilter = (value: string) => {
   const array = [
-    '/detail'
+    '/detail',
+    '/member'
   ];
   const str = value.split('-');
   return array.indexOf(`/${!isEmpty(str) ? str[0] : 'unknow'}`);

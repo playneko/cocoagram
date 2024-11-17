@@ -10,6 +10,7 @@ export default defineNuxtRouteMiddleware(async (to: RouteLocationNormalized) => 
   // loginページの場合なにもしません
   if (to.path == '/member/login') return;
   if (to.path == '/permission') return;
+  if (to.path == '/error') return;
 
   // ログイン情報チェックと取得
   const { checkAuthState } = useAuth();
@@ -29,7 +30,7 @@ export default defineNuxtRouteMiddleware(async (to: RouteLocationNormalized) => 
       return await navigateTo('/permission', { replace: true });
     }
     if (to.path == '/member/login') {
-      await navigateTo('/');
+      return await navigateTo('/', { replace: true });
     }
   }
 });

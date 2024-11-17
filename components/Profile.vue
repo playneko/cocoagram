@@ -4,15 +4,20 @@
       <v-avatar size="100">
         <v-img
           :src="profileInfo.photoURL"
+          @click="pageMove(0, 2)"
         ></v-img>
       </v-avatar>
       <div class="profile-text">
+        <div class="profile-text-style">{{ profileInfo.story_cnt }}</div>
+        <div class="text-center">投稿</div>
+      </div>
+      <div class="profile-text">
         <div class="profile-text-style">{{ profileInfo.like_cnt }}</div>
-        <div>いいね</div>
+        <div class="text-center">いいね</div>
       </div>
       <div class="profile-text">
         <div class="profile-text-style">{{ profileInfo.comment_cnt }}</div>
-        <div>コメント</div>
+        <div class="text-center">コメント</div>
       </div>
     </div>
     <div class="profile-top profile-name">
@@ -24,7 +29,6 @@
     </div>
     <div v-show="isRead === 1" class="profile-content">
       <div v-html="replaceNl2blank(profileInfo.content)"></div>
-      <span @click="readToggle(-1)">読み返す</span>
     </div>
     <div>
       <v-layout class="mx-auto" max-width="100%">
@@ -42,7 +46,7 @@
                     color="grey-lighten-2"
                     class="profile-radius"
                   >
-                    <v-img :src="item.filename" cover @click="pageMove(item.no)" class="profile-img-height"></v-img>
+                    <v-img :src="item.filename" cover @click="pageMove(item.no, 1)" class="profile-img-height"></v-img>
                   </v-sheet>
                 </v-col>
               </v-row>
@@ -72,8 +76,12 @@ const readToggle = (index: number) => {
 }
 
 // 詳細ページ移動
-const pageMove = async (sid: number) => {
-  await navigateTo(`/detail/${sid}`);
+const pageMove = async (sid: number, type: number) => {
+  if (type === 1) {
+    await navigateTo(`/detail/${sid}`);
+  } else if (type === 2) {
+    await navigateTo(`/member/modify`);
+  }
 }
 
 // コメント取得
@@ -108,7 +116,11 @@ const loadList = async ({ done }: any) => {
       scrollFlg.value = data.value.scroll > 0 ? true : false;
       if (data.value.success && !isEmpty(data.value.rows)) {
         imageList.value.push(...data.value.rows);
+      } else {
+        errorCheck();
       }
+    } else {
+      errorCheck();
     }
   }
   done('ok');

@@ -57,6 +57,10 @@ const detailInfo = ref({
   createAt: null
 });
 
+if (isEmpty(route.params.id)) {
+  await navigateTo('/');
+}
+
 const { data } = await useAsyncData('item', () => $fetch(`${config.public.apiCocoaDetailInfo}`, {
   method: "POST",
   body: {

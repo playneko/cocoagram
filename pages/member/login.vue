@@ -19,7 +19,7 @@
       <div class="login-btn_center">
         <v-btn @click="signInGoogle" size="x-large" :loading="isLoading">
           <template v-slot:prepend>
-            <v-avatar image="https://api.playneko.com/devneko/cocoa/image/assets/image/google_g_icon.png"></v-avatar>
+            <v-avatar image="https://api.playneko.com/file/cocoa/image/assets/image/google_g_icon.png"></v-avatar>
           </template>
           Google ログイン
         </v-btn>
@@ -35,7 +35,7 @@ let authUserInfo: any = useCookie<object | null>('authUserInfo');
 const config = useRuntimeConfig();
 const isLoading = ref(false);
 const isError = ref(false);
-const message = ref(null);
+const message: any = ref(null);
 
 // Googleログイン
 const signInGoogle = async () => {
@@ -73,7 +73,7 @@ const sendSignInAuth = async (userInfo: { value: { token: any; uid: any; email: 
         token: userInfo.value.token,
         permission: data.value.permission
       };
-      await navigateTo('/');
+      return await navigateTo('/', { replace: true });
     }
   } else {
     message.value = "システムエラーが発生しました。";

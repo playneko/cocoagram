@@ -68,6 +68,7 @@
 
 <script setup lang="ts">
 import { isEmpty, stringCut, datetimeDiff, distinctLike } from "~/composables/common";
+import { errorCheck } from '~/composables/errorCheck';
 import { useComment } from '~/composables/comment';
 import { useAccount } from '~/composables/account';
 
@@ -129,7 +130,11 @@ const load = async ({ done }: any) => {
       scrollFlg.value = data.value.scroll > 0 ? true : false;
       if (data.value.success && !isEmpty(data.value.rows)) {
         storyList.value.push(...data.value.rows);
+      } else {
+        errorCheck();
       }
+    } else {
+      errorCheck();
     }
   }
   done('ok');

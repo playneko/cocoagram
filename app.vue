@@ -21,4 +21,7 @@ watch(route, () => {
     routeIndex.value = headerFilter(route.name);
   }
 });
+watch(authUserInfo, () => {
+  isLogin.value = isAuthCheck(account, authUserInfo);
+});
 </script>
