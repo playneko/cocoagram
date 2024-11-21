@@ -226,7 +226,7 @@
 
 .comment-emoji {
   width: 100%;
-  height: 150px;
+  height: 220px;
   overflow: auto;
   background: #fff;
 }
@@ -264,6 +264,22 @@
 
 .detail-overflow > .v-window {
   margin-top: 64px;
+}
+
+.detail-comment {
+  bottom: 0;
+  width: 100%;
+  height: 55px;
+  position: fixed;
+}
+
+.detail-comment > div {
+  width: 100%;
+}
+
+.detail-overflow .v-btn--icon.v-btn--density-default {
+  width: calc(var(--v-btn-height) + 0px) !important;
+  height: calc(var(--v-btn-height) + 0px) !important;
 }
 
 /* upload */

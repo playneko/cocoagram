@@ -87,9 +87,9 @@ const readToggle = (index: number) => {
 
 // コメント開く
 const commentToggle = (invaild: boolean, index: number) => {
+  setCommentCount();
   setIsComment(invaild);
   setCommentNo(index);
-  setCommentCount();
 }
 
 // いいね処理

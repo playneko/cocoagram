@@ -105,13 +105,12 @@ import { imageList, getImage } from "~/composables/emoji";
 import { useComment } from '~/composables/comment';
 import { useAccount } from '~/composables/account';
 
-const { commentNo, commentCount, isComment, setIsComment } = useComment();
+const { commentNo, commentCount, isComment, setIsComment, setCommentCount } = useComment();
 const { account } = useAccount();
 const config = useRuntimeConfig();
 const avatarMe = ref(account.value ? account.value.photoURL : null);
 const userId = ref(account.value ? account.value.uid : null);
 const commentList: any = ref([]);
-const commentWriteFlg = ref(0);
 const commentContent = ref("");
 const isLoading = ref(false);
 const isEmoji = ref(false);
@@ -120,27 +119,32 @@ const selectImage = ref();
 // モーダルクローズ
 const closeModal = () => {
   commentList.value = [];
+  commentContent.value = "";
+  selectImage.value = null;
+  isLoading.value = false;
+  isEmoji.value = false;
   setIsComment(false);
 }
 
 // コメント取得
-const { data } = await useAsyncData('item', () => $fetch(`${config.public.apiCocoaCommentList}`, {
-  method: "POST",
-  body: {
-    sid: commentNo.value
-  }
-}),{
-  watch: [commentNo, commentCount, commentWriteFlg]
-});
-
-// リストを再取得した場合、データを再設定
-watch(data, () => {
-  commentList.value = [];
+const getComments = async () => {
+  const { data } = await useAsyncData('item', () => $fetch(`${config.public.apiCocoaCommentList}`, {
+    method: "POST",
+    body: {
+      sid: commentNo.value
+    }
+  }));
   if (!isEmpty(data.value)) {
     if (data.value.success) {
       commentList.value = data.value.rows;
     }
   }
+};
+
+// リストを再取得した場合、データを再設定
+watch(commentCount, () => {
+  commentList.value = [];
+  getComments();
 });
 
 // コメント処理
@@ -157,7 +161,7 @@ const sendFetch = async (url: any, content: string, emoji: string, cid: number) 
   }));
   if (!isEmpty(data.value)) {
     if (data.value.success) {
-      commentWriteFlg.value++;
+      setCommentCount();
     }
   }
   commentContent.value = "";

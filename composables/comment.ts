@@ -19,7 +19,7 @@ export const useComment = (): Comment => {
     commentNo.value = newCommentNo;
   };
   const setCommentCount = () => {
-    commentCount.value++;
+    commentCount.value = commentCount.value + 1;
   };
 
   return {
