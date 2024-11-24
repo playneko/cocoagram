@@ -62,7 +62,17 @@ const distinctLike = (array: any[], value: number) => {
 const headerFilter = (value: string) => {
   const array = [
     '/detail',
+    '/modify',
     '/member'
+  ];
+  const str = value.split('-');
+  return array.indexOf(`/${!isEmpty(str) ? str[0] : 'unknow'}`);
+}
+
+// バックヘッダページチェック
+const headerSubMenu = (value: string) => {
+  const array = [
+    '/detail'
   ];
   const str = value.split('-');
   return array.indexOf(`/${!isEmpty(str) ? str[0] : 'unknow'}`);
@@ -88,6 +98,7 @@ export {
   datetimeDiff,
   distinctLike,
   headerFilter,
+  headerSubMenu,
   fileFilter,
   replaceNl2blank
 };
